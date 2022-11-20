@@ -27,15 +27,16 @@ func TestCreateNumbers(t *testing.T) {
 func TestCalculateEvens(t *testing.T) {
 	numbers := create_numbers()
 	evens := filter_evens(numbers)
-	if len(evens) != 4 {
-		t.Errorf("Evens length was incorrect, got: %d, want: %d.", len(evens), 4)
-	}
-	if evens[0] != 2 {
-		t.Errorf("Evens[0] was incorrect, got: %d, want: %d.", evens[0], 2)
-	}
-	if evens[len(evens)-1] != 8 {
-		t.Errorf("Evens[0] was incorrect, got: %d, want: %d.", evens[len(evens)-1], 8)
-	}
+	assertEqual(t, 4, len(evens), "length")
+	assertEqual(t, 2, evens[0], "first")
+	assertEqual(t, 8, evens[len(evens)-1], "last")
+}
+
+func TestMapEntries(t *testing.T) {
+	m := map[int]int{3: 9}
+	entries := map_entries(m)
+	assertEqual(t, 1, len(entries), "length")
+	assertEqual(t, 3, entries[0].key, "key")
 }
 
 func TestCalculateSum(t *testing.T) {
