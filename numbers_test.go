@@ -56,3 +56,7 @@ func TestReverseMap(t *testing.T) {
 	rm2 := reverse_map(hm2)
 	assertEqual(t, 3, rm2.Get(9), "Result was incorrect")
 }
+
+func TestMain(t *testing.T) {
+	main()
+}
