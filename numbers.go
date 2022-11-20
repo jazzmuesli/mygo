@@ -62,7 +62,7 @@ func reverse_map[K, V comparable](hm Map[K, V]) *Map[V, K] {
 	return u.Reduce(hm.Keys(), f, new(Map[V, K]))
 }
 
-func main() {
+func print_numbers() {
 	numbers := create_numbers()
 	// filter even numbers from the slice
 	evens := filter_evens(numbers)

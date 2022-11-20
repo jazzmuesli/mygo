@@ -58,5 +58,5 @@ func TestReverseMap(t *testing.T) {
 }
 
 func TestMain(t *testing.T) {
-	main()
+	print_numbers()
 }
