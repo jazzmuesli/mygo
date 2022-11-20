@@ -25,19 +25,25 @@ func prepare_database(fname string) *gorm.DB {
 }
 func create_person(db *gorm.DB) *gorm.DB {
 	// Create
-	return db.Create(&Person{FirstName: "John", LastName: "Doe"})
+	person := Person{FirstName: "John", LastName: "Doe"}
+	result := db.Create(&person)
+	fmt.Printf("Error: %v, ID: %v\n", result.Error, person.ID)
+	return result
 }
 
-func find_person_by_id(db *gorm.DB) Person {
+func find_person_by_id(db *gorm.DB, id int) Person {
 	var person Person
-	db.First(&person, 1) // find product with integer primary key
+	result := db.First(&person, id) // find product with integer primary key
 
+	if result.Error != nil {
+		fmt.Print(result.Error)
+	}
 	return person
 }
 
 func find_person_by_fname(db *gorm.DB, firstName string) Person {
 	var person Person
-	db.First(&person, "FirstName = ?", "John") // find product with code D42
+	db.First(&person, "FirstName = ?", "John")
 	return person
 }
 
@@ -46,7 +52,7 @@ func crud_person() {
 	db := prepare_database("main.db")
 	create_person(db)
 	// Read
-	person_by_id := find_person_by_id(db)
+	person_by_id := find_person_by_id(db, 1)
 	person_by_fname := find_person_by_fname(db, "John")
 
 	// Update - update product's price to 200
